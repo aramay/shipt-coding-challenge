@@ -1,0 +1,22 @@
+{
+  "name": "shipt-coding-challenge",
+  "version": "1.0.0",
+  "description": "protractor-demo",
+  "main": "conf.js",
+  "dependiencies": {
+    "protractor": "^5.1.1",
+    "node": "^6.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-e2e": "protractor conf.js",
+    "test-e2e-dev": "protractor conf.js --chrome",
+    "test-e2e-ios": "protractor conf.js --ios"
+  },
+  "author": "aramay",
+  "license": "MIT",
+  
+  "devDependencies": {
+    "appium": "^1.6.3"
+  }
+}
