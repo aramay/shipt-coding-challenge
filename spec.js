@@ -30,7 +30,7 @@ describe('Shipt coding challenge', function() {
 
   })
 
-  it("user should be able to search items with search feature", function(){
+  xit("user should be able to search items with search feature", function(){
 
     var email = element(by.model('login.username')).sendKeys("qatest@shipt.com")
     var password = element(by.model('login.password')).sendKeys("Sh1pt123!")
@@ -46,6 +46,8 @@ describe('Shipt coding challenge', function() {
     // browser.wait(EC.presenceOf(elm), 10000);
     
     // var item = element.all(by.repeater('product in searchResults')).get(0).click()
+
+    //find first item in search
     var firstItem = element.all(by.repeater('product in searchResults')).first()
 
     //add item to cart
@@ -59,21 +61,41 @@ describe('Shipt coding challenge', function() {
 
     // match item in cart to item searched for
     expect(itemText).toContain(itemInCart)
-    
-    
-    // var itemInCart = element.all(by.repeater('[ng-click="cartItem in cartItems"]')).get(0).getText()
-
-
-    // console.log("itemInCart ", itemInCart)
-    // element(by.css('[ng-click="addItem(product)"]')).click()"clickCartItem(cartItem)"
-
-    // console.log("firstItem ", firstItem)
-
-    // firstItem.findElement(by.css('[ng-click="viewModel.accountClick()"]'))
-    // expect(element(by.css('[ng-click="completeOrder()"]')).isPresent()).toBe(true);
-
-    // expect(item).toEqual("test")
      
+  })
+
+  it("user should be able to search items with category menu", function(){
+
+    var email = element(by.model('login.username')).sendKeys("qatest@shipt.com")
+    var password = element(by.model('login.password')).sendKeys("Sh1pt123!")
+
+    element(by.id('start_shopping_login_button')).click()
+
+    //click menu tabs
+    element(by.css('[ng-click="viewModel.shopCategories($event)"]')).click()
+    
+    //click item in category
+    var lastItem = element.all(by.repeater('category in vm.categories')).first().click()
+    // element(by.css('[ng-click="vm.categoryClick(category)"]')).click()
+
+    //find first item in list
+
+    var itemText = element.all(by.repeater('product in products')).first().getText()
+
+    var itemInCategory = element.all(by.repeater('product in products')).first()
+
+    //add item to cart
+    itemInCategory.element(by.css('[ng-click="addItem(product)"]')).click()
+
+    //click cart link
+    element(by.css('[ng-click="cartClick()"]')).click()
+
+    //get text of item in cart
+    var itemInCart = element(by.css('[ng-click="clickCartItem(cartItem)"]')).getText()
+
+    // match item in cart to item searched for
+    expect(itemText).toContain(itemInCart)
+    
   })
   
   
