@@ -5,6 +5,7 @@ var IndexPage = require('./IndexPage')
 describe('Shipt coding challenge', function() {
 
   var page = new IndexPage();
+  var EC = protractor.ExpectedConditions;
 
   beforeEach(function(){
     // browser.get('http://juliemr.github.io/protractor-demo/');
@@ -36,9 +37,42 @@ describe('Shipt coding challenge', function() {
 
     element(by.id('start_shopping_login_button')).click()
 
+    //search for item
     element(by.model("search.searchQuery")).sendKeys("plum orga")
 
-    element.all(by.repeater('product in searchResults'))
+    //get item text(title)
+    var itemText = element.all(by.repeater('product in searchResults')).get(0).getText()
+
+    // browser.wait(EC.presenceOf(elm), 10000);
+    
+    // var item = element.all(by.repeater('product in searchResults')).get(0).click()
+    var firstItem = element.all(by.repeater('product in searchResults')).first()
+
+    //add item to cart
+    firstItem.element(by.css('[ng-click="addItem(product)"]')).click()
+
+    //click cart link
+    element(by.css('[ng-click="cartClick()"]')).click()
+
+    //get text of item in cart
+    var itemInCart = element(by.css('[ng-click="clickCartItem(cartItem)"]')).getText()
+
+    // match item in cart to item searched for
+    expect(itemText).toContain(itemInCart)
+    
+    
+    // var itemInCart = element.all(by.repeater('[ng-click="cartItem in cartItems"]')).get(0).getText()
+
+
+    // console.log("itemInCart ", itemInCart)
+    // element(by.css('[ng-click="addItem(product)"]')).click()"clickCartItem(cartItem)"
+
+    // console.log("firstItem ", firstItem)
+
+    // firstItem.findElement(by.css('[ng-click="viewModel.accountClick()"]'))
+    // expect(element(by.css('[ng-click="completeOrder()"]')).isPresent()).toBe(true);
+
+    // expect(item).toEqual("test")
      
   })
   
