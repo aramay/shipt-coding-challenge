@@ -5,7 +5,6 @@ var IndexPage = require('./IndexPage')
 describe('Shipt coding challenge', function() {
 
   var page = new IndexPage();
-  var EC = protractor.ExpectedConditions;
 
   beforeEach(function(){
     // browser.get('http://juliemr.github.io/protractor-demo/');
@@ -21,10 +20,7 @@ describe('Shipt coding challenge', function() {
 
   xit("user should be able to login", function(){
 
-    var email = element(by.model('login.username')).sendKeys("qatest@shipt.com")
-    var password = element(by.model('login.password')).sendKeys("Sh1pt123!")
-
-    element(by.id('start_shopping_login_button')).click()
+    page.login()
 
     expect(element(by.css('[ng-click="viewModel.accountClick()"]')).isPresent()).toBe(true);
 
@@ -66,29 +62,25 @@ describe('Shipt coding challenge', function() {
 
   it("user should be able to search items with category menu", function(){
 
-    var email = element(by.model('login.username')).sendKeys("qatest@shipt.com")
-    var password = element(by.model('login.password')).sendKeys("Sh1pt123!")
-
-    element(by.id('start_shopping_login_button')).click()
-
+    //login user
+    page.login()
     //click menu tabs
-    element(by.css('[ng-click="viewModel.shopCategories($event)"]')).click()
-    
+    page.getMenuTabLink()
     //click item in category
-    var lastItem = element.all(by.repeater('category in vm.categories')).first().click()
-    // element(by.css('[ng-click="vm.categoryClick(category)"]')).click()
+    page.getMenuCategoryItem()
 
-    //find first item in list
-
-    var itemText = element.all(by.repeater('product in products')).first().getText()
-
-    var itemInCategory = element.all(by.repeater('product in products')).first()
+    //get item text
+    var itemText = page.getTextOfItemInMenuCategory()
+    //find first product in category
+    var productInMenuCategory = page.getProductinMenuCategory()
 
     //add item to cart
-    itemInCategory.element(by.css('[ng-click="addItem(product)"]')).click()
+    productInMenuCategory.element(by.css('[ng-click="addItem(product)"]')).click()
+    // page.addItemToCart(productInMenuCategory)
 
     //click cart link
-    element(by.css('[ng-click="cartClick()"]')).click()
+    // element(by.css('[ng-click="cartClick()"]')).click()
+    page.clickCartLink()
 
     //get text of item in cart
     var itemInCart = element(by.css('[ng-click="clickCartItem(cartItem)"]')).getText()
@@ -97,34 +89,6 @@ describe('Shipt coding challenge', function() {
     expect(itemText).toContain(itemInCart)
     
   })
-  
-  
-  // it('should have add 2 and 2', function() {
-    
-
-  //   page.add(2,2)
-  //   expect(page.getResult()).toEqual('4');
-  //   // console.log(page.getResult())
-
-  //   // element(by.model('first')).sendKeys(2)
-  //   // element(by.model('second')).sendKeys(2)
-  //   // element(by.id('gobutton')).click()
-  //   // firstNum.sendKeys(2)
-  //   // secondNum.sendKeys(2)
-  //   // button.click()
-    // expect(browser.getTitle()).toEqual('Super calculator');
-
-  // })
-  
-  // it('should have a history', function(){
-
-  //   page.add(1,2)
-  //   expect(page.getHistory()).toEqual(1)
-  //   // add(1, 2)
-  //   // expect(history.count()).toEqual(1)
-  //   // add(3, 2)
-  //   // expect(history.count()).toEqual(2)
 
 
-  // })
 });
