@@ -7,7 +7,7 @@
 2. run `npm install`
 
 3. Install `Protractor` globally `npm install -g protractor`
-  * Follow instrctions here [Protractor](https://www.google.com "Protractor")
+  * Follow instrctions here [Protractor](http://www.protractortest.org/#/ "Protractor")
 
 4. start up a server with `webdriver-manager start`
 
