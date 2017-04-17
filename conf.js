@@ -56,5 +56,5 @@ if(process.argv[3] === '--chrome'){
 
 
 
-exports.config = config
 console.log("running chrome capabilities ", exports.config)
+exports.config = config

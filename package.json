@@ -9,10 +9,14 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-e2e": "protractor conf.js",
-    "test-e2e-dev": "protractor conf.js --chrome",
-    "test-e2e-ios": "protractor conf.js --ios"
+
+    "test-e2e-dev": "protractor conf.js --chrome"
+
   },
   "author": "aramay",
   "license": "MIT"
 }
+
+
+XMLHttpRequest cannot load https://app.shipt.com//api/v1/customers/next_delivery_availablity.json?device_type=web. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'https://shop.shipt.com' is therefore not allowed access. The response had HTTP status code 500.
+ionic.bundlev132.min.js:150 [null, "Error loading next availablity."]
