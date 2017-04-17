@@ -3,8 +3,9 @@ function IndexPage () {
   this.password = element(by.model('login.password'))
   this.loginButton = element(by.id('start_shopping_login_button'))
 
-  this.result = element(by.binding('latest'))
-  this.history = element.all(by.repeater('result in memory'))
+  this.searchTextBox = element(by.model("search.searchQuery"))
+
+  this.productInSearchResult = element.all(by.repeater('product in searchResults'))
 
   this.menuTabLink = element(by.css('[ng-click="viewModel.shopCategories($event)"]'))
 
@@ -14,9 +15,8 @@ function IndexPage () {
 
   this.productInMenuCategory = element.all(by.repeater('product in products'))
 
-  // this.cart = this.productInMenuCategory.element(by.css('[ng-click="addItem(product)"]'))
-
   this.cartLink = element(by.css('[ng-click="cartClick()"]'))
+
 
   this.get = function () {
     // browser.get('https://www.shipt.com/main/')
@@ -29,6 +29,14 @@ function IndexPage () {
     this.password.sendKeys('Sh1pt123!')
 
     this.loginButton.click()
+  }
+  //search for product
+  this.searchItem = function(args){
+    this.searchTextBox.sendKeys(args)
+  }
+
+  this.getProductNameSearchResult = function(){
+    return this.productInSearchResult.get(0).getText()
   }
 
   // return menu items links
@@ -62,10 +70,6 @@ function IndexPage () {
 
   this.getTitle = function () {
     return browser.getTitle()
-  }
-
-  this.clickButton = function () {
-    this.button.click()
   }
 
   

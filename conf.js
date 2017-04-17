@@ -1,34 +1,36 @@
 // conf.js
 var browsers = {
-  firefox: {
-    name: 'Firefox',
-    browserName: "firefox" 
-  },
+  
   chrome: {
     name: 'Chrome',
     browserName: "chrome" 
-  },
-  ios: {
-    name: 'iOS 7 - iPad',
-    platformName: 'iOS',
-    platformVersion: '7.1',
-    deviceName: 'IPad Simulator',
-    browserName: 'safari',
-    orientation: 'landscape'
   }
+  
 }
 
 var config =  {
 
-  // capabilities: {
-  //   name: 'Chrome',
-  //   browserName: "chrome"
-  // },
-
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['./spec.js'],
-  
+  specs: ['./spec.js']
+
+  // onPrepare: function() {
+  //   // browser.driver.get(env.baseUrl + '/ng1/login.html');
+  //   browser.driver.get('https://shop.shipt.com/#/app/home');
+
+  //   browser.driver.findElement(by.id('username')).sendKeys('Jane');
+  //   browser.driver.findElement(by.id('password')).sendKeys('1234');
+  //   browser.driver.findElement(by.id('clickme')).click();
+
+  //   // Login takes some time, so wait until it's done.
+  //   // For the test app's login, we know it's done when it redirects to
+  //   // index.html.
+  //   return browser.driver.wait(function() {
+  //     return browser.driver.getCurrentUrl().then(function(url) {
+  //       return /index/.test(url);
+  //     });
+  //   }, 10000);
+  // }
   
 }
 
@@ -40,19 +42,19 @@ if(process.argv[3] === '--chrome'){
 
   config.capabilities = browsers.chrome
 }
-else if(process.argv[3] === 'ios'){
-  config.seleniumAddress = 'http://localhost:4723/wd/hub',
-  config.capabilities = browsers.ios
-}
-else{
-  console.log("running chrome multi capabilities")
-  config.multiCapabilities = [
-    browsers.chrome,
-    browsers.firefox
-  ]
-}
+// else if(process.argv[3] === 'ios'){
+//   config.seleniumAddress = 'http://localhost:4723/wd/hub',
+//   config.capabilities = browsers.ios
+// }
+// else{
+//   console.log("running chrome multi capabilities")
+//   config.multiCapabilities = [
+//     browsers.chrome,
+//     browsers.firefox
+//   ]
+// }
 
 
-console.log("running chrome capabilities ", exports.config)
 
 exports.config = config
+console.log("running chrome capabilities ", exports.config)

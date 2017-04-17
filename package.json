@@ -14,9 +14,5 @@
     "test-e2e-ios": "protractor conf.js --ios"
   },
   "author": "aramay",
-  "license": "MIT",
-  
-  "devDependencies": {
-    "appium": "^1.6.3"
-  }
+  "license": "MIT"
 }
